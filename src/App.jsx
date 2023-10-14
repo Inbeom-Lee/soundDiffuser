@@ -5,6 +5,7 @@ import { Home } from "Components/home";
 import { NewRequest, HistoryRequest } from "./pages/index";
 
 const Error = lazy(() => import("./pages/Error"));
+const Test = lazy(() => import("./pages/Test"));
 
 const App = () => {
   return (
@@ -29,6 +30,7 @@ const App = () => {
             }
           />
           <Route path="/error" element={<Error />} />
+          <Route path="/test" element={<Test />} />
           <Route path="/*" element={<Navigate to="/" replace />} />
         </Routes>
       </Suspense>
