@@ -5,15 +5,19 @@ const ContextRequest = React.createContext();
 export const useRequest = () => useContext(ContextRequest);
 export const RequestProvider = ({ children }) => {
   const [dataRequest, setDataRequest] = useMemoState();
+  const [pageRef, setPageRef] = useMemoState("search");
   const [textSearch, setTextSearch] = useMemoState("");
   const [listSearch, setListSearch] = useMemoState();
   const [nextPageToken, setNextPageToken] = useMemoState();
   const [scrollPosition_References, setScrollPosition_References] =
     useMemoState();
+  const [isEdited, setIsEdited] = useMemoState(false);
 
   const memoTotal = {
     dataRequest,
     setDataRequest,
+    pageRef,
+    setPageRef,
     textSearch,
     setTextSearch,
     listSearch,
@@ -22,6 +26,8 @@ export const RequestProvider = ({ children }) => {
     setNextPageToken,
     scrollPosition_References,
     setScrollPosition_References,
+    isEdited,
+    setIsEdited,
   };
 
   return (

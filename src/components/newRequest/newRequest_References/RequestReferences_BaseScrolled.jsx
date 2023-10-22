@@ -9,6 +9,7 @@ export const RequestReferences_BaseScrolled = ErrorPicker(
     nextPageToken,
     scrollPosition_References,
     isYoutubeURL,
+    isSearch,
     setRunSearching,
     children,
   }) => {
@@ -32,7 +33,8 @@ export const RequestReferences_BaseScrolled = ErrorPicker(
         // checkScrollEnd && setRunSearching(true);
 
         //---------- YOUTUBE ----------
-        checkScrollEnd && // 스크롤이 다 되었는지 체크
+        isSearch &&
+          checkScrollEnd && // 스크롤이 다 되었는지 체크
           nextPageToken && // 다음 페이지 토큰이 있는지 체크
           !runSearching && // 이미 검색중인지 체크
           !isYoutubeURL && // url이 아닌지 체크
@@ -41,7 +43,7 @@ export const RequestReferences_BaseScrolled = ErrorPicker(
         //스크롤 포지션 임시 기록
         refScrollPosition.current = scrollTop;
       },
-      [runSearching, nextPageToken]
+      [isSearch, runSearching, nextPageToken]
     );
 
     const render = (

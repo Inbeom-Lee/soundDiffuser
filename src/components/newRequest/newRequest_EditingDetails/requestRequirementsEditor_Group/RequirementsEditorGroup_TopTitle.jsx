@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import ErrorPicker from "ErrorPicker";
-import svgUp from "Asset/svg/toggleUp.svg";
-import svgDown from "Asset/svg/toggleDown.svg";
+import svgUp from "Assets/svg/toggleUp.svg";
+import svgDown from "Assets/svg/toggleDown.svg";
 
 export const RequirementsEditorGroup_TopTitle = ErrorPicker(
   ({ index, toggle, setToggle }) => {

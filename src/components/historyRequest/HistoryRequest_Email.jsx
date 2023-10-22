@@ -6,6 +6,7 @@ import {
   RequestBase,
   RequestContainer,
   Request_Navigation,
+  Request_Background,
 } from "../shared/request";
 import {
   RequestEmail_Input,
@@ -18,13 +19,14 @@ export const HistoryRequest_Email = ErrorPicker(() => {
   const render = (
     <RequestBase>
       <RequestContainer>
-        <Request_Navigation />
+        <Request_Navigation showBack={true} />
         <Container>
           <Text>의뢰 내역을 확인하기 위한 이메일을 입력해주세요</Text>
           <RequestEmail_Input email={email} setEmail={setEmail} />
           <RequestEmail_Button email={email} />
         </Container>
       </RequestContainer>
+      <Request_Background />
     </RequestBase>
   );
   return render;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useCallback } from "react";
+import React, { useEffect, useMemo, useCallback } from "react";
 import styled from "styled-components";
 import ErrorPicker from "ErrorPicker";
 import { useRequest } from "Contexts";
@@ -8,57 +8,60 @@ import {
   RequestContainer,
   RequestBottomContainer,
   Request_Navigation,
+  Request_Background,
   Request_BottomButton,
 } from "../shared/request";
 import { RequestRequirementsEditor_Group } from "./newRequest_EditingDetails/index";
 
 export const NewRequest_EditingDetails = ErrorPicker(() => {
-  const [isEdited, setIsEdited] = useState(false);
-  const { dataRequest, setDataRequest } = useRequest();
+  const { dataRequest, setDataRequest, isEdited, setIsEdited } = useRequest();
   const { listReference } = dataRequest || {};
 
+  //개발 테스트용
   // useEffect(() => {
   //   const dummy1 = dummy_ListYoutube[0];
   //   const dummy2 = dummy_ListYoutube[1];
   //   const dummy3 = dummy_ListYoutube[2];
-  //   setDataRequest((prev) => ({
-  //     ...(prev || {}),
-  //     listReference: {
-  //       [dummy1.id.videoId]: {
-  //         ...dummy1,
-  //         dataEdit: {
-  //           speed: "3",
-  //           style: "3",
-  //           timing: "3",
-  //           mood: "3",
-  //           clarity: "3",
-  //           temperature: "3",
+
+  //   !dataRequest &&
+  //     setDataRequest((prev) => ({
+  //       ...(prev || {}),
+  //       listReference: {
+  //         [dummy1.id.videoId]: {
+  //           ...dummy1,
+  //           dataEdit: {
+  //             speed: "0",
+  //             style: "0",
+  //             timing: "0",
+  //             mood: "0",
+  //             clarity: "0",
+  //             temperature: "0",
+  //           },
+  //         },
+  //         [dummy2.id.videoId]: {
+  //           ...dummy2,
+  //           dataEdit: {
+  //             speed: "0",
+  //             style: "0",
+  //             timing: "0",
+  //             mood: "0",
+  //             clarity: "0",
+  //             temperature: "0",
+  //           },
+  //         },
+  //         [dummy3.id.videoId]: {
+  //           ...dummy3,
+  //           dataEdit: {
+  //             speed: "0",
+  //             style: "0",
+  //             timing: "0",
+  //             mood: "0",
+  //             clarity: "0",
+  //             temperature: "0",
+  //           },
   //         },
   //       },
-  //       [dummy2.id.videoId]: {
-  //         ...dummy2,
-  //         dataEdit: {
-  //           speed: "3",
-  //           style: "3",
-  //           timing: "3",
-  //           mood: "3",
-  //           clarity: "3",
-  //           temperature: "3",
-  //         },
-  //       },
-  //       [dummy3.id.videoId]: {
-  //         ...dummy3,
-  //         dataEdit: {
-  //           speed: "3",
-  //           style: "3",
-  //           timing: "3",
-  //           mood: "3",
-  //           clarity: "3",
-  //           temperature: "3",
-  //         },
-  //       },
-  //     },
-  //   }));
+  //     }));
   // }, []);
 
   const arrayReference = useMemo(() => {
@@ -71,7 +74,7 @@ export const NewRequest_EditingDetails = ErrorPicker(() => {
   const render = (
     <RequestBase>
       <RequestContainer>
-        <Request_Navigation />
+        <Request_Navigation showBack={true} />
         <Container>
           <SubText>마지막 단계입니다!</SubText>
           <Text>결과물 희망 컨셉을 세부 조정할 수 있어요.</Text>
@@ -93,6 +96,7 @@ export const NewRequest_EditingDetails = ErrorPicker(() => {
           textButton="다음"
         />
       </RequestBottomContainer>
+      <Request_Background />
     </RequestBase>
   );
   return render;

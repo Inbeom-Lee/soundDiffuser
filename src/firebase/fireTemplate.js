@@ -1,4 +1,3 @@
-import { ref, child, get, set, update, remove } from "firebase/database";
 import {
   collection,
   doc,
@@ -29,42 +28,7 @@ const checkRef = (refArray) => {
     )}`;
 };
 
-//RTDB-------------------------------------------
-
-//DB읽기
-export const templateReadDB = async (dbType, refArray) => {
-  checkRef(refArray);
-  const getRef = joinRef(refArray);
-  const getData = await (await get(child(ref(dbType), `${getRef}`))).val();
-  return getData;
-};
-
-//DB쓰기
-export const templateWriteDB = async (dbType, data, refArray) => {
-  checkData(data, refArray);
-  checkRef(refArray);
-  const getRef = joinRef(refArray);
-  await set(ref(dbType, `${getRef}`), data);
-};
-
-//DB업데이트
-export const templateUpdateDB = async (dbType, data, refArray) => {
-  checkData(data, refArray);
-  checkRef(refArray);
-  const getRef = joinRef(refArray);
-  await update(ref(dbType, `${getRef}`), data);
-};
-
-//DB삭제
-export const templateDeleteDB = async (dbType, refArray) => {
-  checkRef(refArray);
-  const getRef = joinRef(refArray);
-  await remove(ref(dbType, `${getRef}`));
-};
-
-//FS-------------------------------------------
-
-//FS읽기
+//FS Document 읽기
 export const templateReadDocFS = async (fsType, refDoc) => {
   checkRef(refDoc);
   const getRefDoc = joinRef(refDoc);
@@ -72,7 +36,7 @@ export const templateReadDocFS = async (fsType, refDoc) => {
   const checkExist = getData.exists();
   return checkExist ? getData.data() : undefined;
 };
-//FS읽기
+//FS Collection 읽기
 export const templateReadColFS = async (fsType, refDoc) => {
   checkRef(refDoc);
   const getRefDoc = joinRef(refDoc);

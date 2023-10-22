@@ -4,7 +4,7 @@ import styled from "styled-components";
 import ErrorPicker from "ErrorPicker";
 // import { useRequest } from "Contexts";
 import { PageAnimation_FadeRise, Button_Primary } from "Components";
-import svgLogo from "Asset/logos/logo_SoundDiffuser.svg";
+import svgLogo from "Assets/logos/logo_SoundDiffuser.svg";
 
 export const Home = ErrorPicker(() => {
   const naviage = useNavigate();
@@ -17,9 +17,11 @@ export const Home = ErrorPicker(() => {
         <Logo src={svgLogo} />
         <Text>생성형 AI 기반 ‘사운드 디자인’ 전문가 매칭 서비스</Text>
         <Title>
-          음악 작업 의뢰를
+          여러분의 소중한 창작물,
           <br />
-          손쉽게 맡겨보세요.
+          사운드 디퓨저가 함께
+          <br />
+          소리내어드립니다.
         </Title>
         <Button onClick={handleStart}>음악 의뢰하기</Button>
         <ButtonLink to="/historyRequest/email">의뢰내역 확인하기</ButtonLink>
@@ -50,18 +52,19 @@ const Logo = styled.img`
   width: 115px;
 `;
 const Text = styled.p`
-  margin-top: 14px;
+  margin-top: 19px;
   width: fit-content;
   font-weight: 700;
   color: #fff;
   text-align: center;
 `;
 const Title = styled.h4`
-  margin-top: 34px;
+  margin-top: 33px;
   width: fit-content;
   font-size: 24px;
   color: #fff;
   text-align: center;
+  line-height: 40px;
 `;
 const Button = styled(Button_Primary)`
   margin-top: 46px;
@@ -70,11 +73,9 @@ const Button = styled(Button_Primary)`
 `;
 const ButtonLink = styled(Link)`
   display: block;
-  margin-top: 21px;
+  margin-top: 13px;
   height: 40px;
   line-height: 40px;
-  font-weight: 700;
   font-size: 12px;
-  text-decoration: none;
   color: #fff;
 `;

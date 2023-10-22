@@ -16,25 +16,6 @@ export const RequestReferences_ListSelected = ErrorPicker(
     );
     const lengthList = arrayList?.length || 0;
 
-    const handleDelete = useCallback(
-      (videoId) => {
-        try {
-          const { title } = listReference[videoId]?.snippet || {};
-
-          if (confirm(`'${title}'을 리스트에서 제거하시겠습니까?`)) {
-            setDataRequest((prev) => {
-              const { [videoId]: _, ...rest } = prev.listReference;
-
-              return { ...prev, listReference: rest };
-            });
-          }
-        } catch (err) {
-          console.log(err);
-        }
-      },
-      [listReference]
-    );
-
     const render = (
       <>
         <RequestReferencesListSelected_Toggle
@@ -47,7 +28,7 @@ export const RequestReferences_ListSelected = ErrorPicker(
             <RequestReferencesListSelected_Group
               key={`selected${i}${item.id.videoId}`}
               item={item}
-              handleDelete={handleDelete}
+              setDataRequest={setDataRequest}
             />
           ))}
         </Container>

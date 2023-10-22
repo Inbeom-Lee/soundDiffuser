@@ -50,7 +50,7 @@ export const NewRequest_MusicMood = ErrorPicker(() => {
   const render = (
     <RequestBase>
       <RequestContainer>
-        <Request_Navigation />
+        <Request_Navigation showBack={true} />
         <Container>
           <Text>원하는 결과물이 다음 중 어디에 가깝나요?</Text>
           {musicQueries_Mood.map((purpose) => (

@@ -1,50 +1,51 @@
-import React from "react";
-import styled from "styled-components";
+import React, { useState, useCallback } from "react";
 import ErrorPicker from "ErrorPicker";
-import svgCloseX from "Asset/svg/closeX.svg";
+import { Modals_Base } from "Components";
+import {
+  ListSelectedGroup_ListItem,
+  ListSelectedGroup_ModalDelete,
+} from "./requestReferencesListSelected_Group/index";
 
 export const RequestReferencesListSelected_Group = ErrorPicker(
-  ({ item, handleDelete }) => {
+  ({ item, setDataRequest }) => {
+    const [showModal, setShowModal] = useState({
+      status: false,
+      transition: false,
+      message: "",
+    });
     const { id, snippet } = item;
     const { title } = snippet;
+    const { videoId } = id;
 
-    const handler = () => handleDelete(id.videoId);
+    const handleShow = useCallback(
+      () => setShowModal((prev) => ({ ...prev, status: true })),
+      []
+    );
+
+    const handleDelete = useCallback(() => {
+      try {
+        setDataRequest((prev) => {
+          const { [videoId]: _, ...rest } = prev.listReference;
+
+          return { ...prev, listReference: rest };
+        });
+      } catch (err) {
+        console.log(err);
+      }
+    }, [videoId]);
 
     const render = (
-      <Container>
-        <Title>{title}</Title>
-        <Icon src={svgCloseX} onClick={handler} />
-      </Container>
+      <>
+        <ListSelectedGroup_ListItem title={title} handleShow={handleShow} />
+        <Modals_Base showModal={showModal} setShowModal={setShowModal}>
+          <ListSelectedGroup_ModalDelete
+            title={title}
+            handleDelete={handleDelete}
+          />
+        </Modals_Base>
+      </>
     );
     return render || null;
   },
   ["RequestReferencesListSelected_Group"]
 );
-
-const Container = styled.div`
-  display: flex;
-  align-items: center;
-  position: relative;
-  padding-left: 26px;
-  padding-right: 35px;
-  height: 37px;
-  background: ${(props) => props.theme.color.grey1};
-`;
-const Title = styled.p`
-  font-family: "appleSD";
-  font-size: 11px;
-  font-weight: 700;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-`;
-const Icon = styled.img`
-  position: absolute;
-  right: 20px;
-  top: 50%;
-  transform: translateY(-50%);
-
-  &:hover {
-    cursor: pointer;
-  }
-`;

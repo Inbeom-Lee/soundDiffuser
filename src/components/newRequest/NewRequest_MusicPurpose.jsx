@@ -50,7 +50,7 @@ export const NewRequest_MusicPurpose = ErrorPicker(() => {
   const render = (
     <RequestBase>
       <RequestContainer>
-        <Request_Navigation />
+        <Request_Navigation showBack={true} />
         <Container>
           <Text>이번 곡의 의뢰 목적이 무엇인가요? </Text>
           {musicQueries_Purpose.map((purpose) => (

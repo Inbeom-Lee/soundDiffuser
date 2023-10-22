@@ -23,7 +23,8 @@ const Container = styled.div`
   font-family: "appleSD";
   font-weight: 700;
   font-size: 10px;
-  background: ${(props) => props.theme.color.grey1};
+  background: ${(props) =>
+    props.$active ? props.theme.color.secondary[400] : props.theme.color.grey1};
   border: ${(props) => (props.$active ? "2px" : "0.5px")} solid
     ${(props) =>
       props.$active

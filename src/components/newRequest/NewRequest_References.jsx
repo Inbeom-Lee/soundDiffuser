@@ -11,9 +11,8 @@ import {
 import {
   RequestReferences_BaseScrolled,
   RequestReferences_Header,
-  RequestReferences_SearchInput,
-  RequestReferences_ItemResult,
-  RequestReferences_ItemsLoading,
+  RequestReferences_Search,
+  RequestReferences_Recommend,
   RequestReferences_ListSelected,
   RequestReferences_BottomButton,
   RequestReferences_PopUp,
@@ -30,9 +29,8 @@ export const NewRequest_References = ErrorPicker(() => {
   const {
     dataRequest,
     setDataRequest,
+    pageRef,
     textSearch,
-    setTextSearch,
-    listSearch,
     setListSearch,
     nextPageToken,
     setNextPageToken,
@@ -94,56 +92,48 @@ export const NewRequest_References = ErrorPicker(() => {
       }
     };
     runSearching && fetchYouTubeData();
-  }, [runSearching]);
+  }, [runSearching, isYoutubeURL]);
 
   const render = (
-    <RequestReferences_BaseScrolled
-      refScrollPosition={refScrollPosition}
-      runSearching={runSearching}
-      nextPageToken={nextPageToken}
-      scrollPosition_References={scrollPosition_References}
-      isYoutubeURL={isYoutubeURL}
-      setRunSearching={setRunSearching}
-    >
-      <RequestContainer>
-        <Request_Navigation routeBack="/request/intro" title="레퍼런스 검색" />
-        <RequestReferences_Header />
-        <RequestReferences_SearchInput
-          textSearch={textSearch}
-          setTextSearch={setTextSearch}
-          setListSearch={setListSearch}
-          setRunSearching={setRunSearching}
+    <>
+      <RequestReferences_BaseScrolled
+        refScrollPosition={refScrollPosition}
+        runSearching={runSearching}
+        nextPageToken={nextPageToken}
+        scrollPosition_References={scrollPosition_References}
+        isYoutubeURL={isYoutubeURL}
+        isSearch={pageRef === "search"}
+        setRunSearching={setRunSearching}
+      >
+        <Request_Background />
+        <RequestContainer>
+          <Request_Navigation />
+          <RequestReferences_Header />
+          {pageRef === "search" && (
+            <RequestReferences_Search
+              runSearching={runSearching}
+              setRunSearching={setRunSearching}
+            />
+          )}
+          {pageRef === "recommend" && <RequestReferences_Recommend />}
+        </RequestContainer>
+        <RequestBottomContainer>
+          <RequestReferences_ListSelected
+            listReference={listReference}
+            setDataRequest={setDataRequest}
+          />
+          <RequestReferences_BottomButton
+            listReference={listReference}
+            refScrollPosition={refScrollPosition}
+            setScrollPosition_References={setScrollPosition_References}
+          />
+        </RequestBottomContainer>
+        <RequestReferences_PopUp
+          showPopUp={showPopUp}
+          setShowPopUp={setShowPopUp}
         />
-        {listSearch?.map(
-          (item, i) =>
-            item && (
-              <RequestReferences_ItemResult
-                key={`result${i}${item.id.videoId}`}
-                item={item}
-                isSelected={Boolean(listReference?.[item.id.videoId])}
-                setDataRequest={setDataRequest}
-              />
-            )
-        )}
-        {runSearching && <RequestReferences_ItemsLoading />}
-      </RequestContainer>
-      <RequestBottomContainer>
-        <RequestReferences_ListSelected
-          listReference={listReference}
-          setDataRequest={setDataRequest}
-        />
-        <RequestReferences_BottomButton
-          listReference={listReference}
-          refScrollPosition={refScrollPosition}
-          setScrollPosition_References={setScrollPosition_References}
-        />
-      </RequestBottomContainer>
-      <RequestReferences_PopUp
-        showPopUp={showPopUp}
-        setShowPopUp={setShowPopUp}
-      />
-      <Request_Background />
-    </RequestReferences_BaseScrolled>
+      </RequestReferences_BaseScrolled>
+    </>
   );
   return render;
 }, ["NewRequest_References"]);

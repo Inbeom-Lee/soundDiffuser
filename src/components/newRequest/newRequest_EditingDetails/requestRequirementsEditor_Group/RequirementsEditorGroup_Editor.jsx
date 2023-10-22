@@ -27,7 +27,7 @@ export const RequirementsEditorGroup_Editor = ErrorPicker(
 
     const render = (
       <>
-        <TextGuide>나의 결과물은 위 레퍼런스 음악보다 oo면 좋겠어요.</TextGuide>
+        <TextGuide>레퍼런스 음악 대비 나의 결과물은 이렇게 해주세요</TextGuide>
         <RequirementsEditorGroupEditor_InputRange
           name="speed"
           value={speed}
@@ -79,8 +79,9 @@ export const RequirementsEditorGroup_Editor = ErrorPicker(
 );
 
 const TextGuide = styled.p`
-  margin-top: 17px;
+  margin-top: 26px;
   font-family: "AppleSD";
   font-weight: 700;
   font-size: 13px;
+  text-align: center;
 `;

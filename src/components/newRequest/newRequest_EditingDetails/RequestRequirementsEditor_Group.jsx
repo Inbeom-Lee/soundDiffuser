@@ -49,8 +49,8 @@ const Container = styled.div`
   border-radius: 10px;
 `;
 const ToggleContainer = styled.div`
-  padding: ${(props) => (props.$toggle ? "0 16px 27px" : "0 16px")};
-  height: ${(props) => (props.$toggle ? 577 : 0)}px;
+  padding: ${(props) => (props.$toggle ? "0 16px 38px" : "0 16px")};
+  height: ${(props) => (props.$toggle ? 622 : 0)}px;
   overflow: hidden;
   transition: 0.5s ${(props) => props.theme.motion.type1};
 `;

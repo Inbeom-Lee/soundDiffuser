@@ -18,11 +18,17 @@ const Container = styled.div`
   position: fixed;
   bottom: 115px;
   left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
+  transform: translateX(calc(-50% - 8px));
+  width: calc(100% - 16px);
   height: 192px;
   max-width: 500px;
   z-index: 0;
+
+  @media (min-width: 530px) {
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
 `;
 const Box1 = styled.div`
   position: absolute;

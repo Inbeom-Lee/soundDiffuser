@@ -6,10 +6,12 @@ export const RequestBase = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  position: relative;
   width: 100%;
   height: 100vh;
   background: ${(props) => props.theme.color.grey1};
   overflow: hidden auto;
+  clip-path: inset(0 0 0 0);
 `;
 export const RequestContainer = styled(Div_Opacity)`
   width: 100%;

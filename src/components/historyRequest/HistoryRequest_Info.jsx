@@ -8,6 +8,7 @@ import { objValues, timeSorter_Descending } from "Helpers";
 import {
   RequestBase,
   RequestContainer,
+  RequestBottomContainer,
   Request_Navigation,
   Request_Background,
 } from "../shared/request";
@@ -53,8 +54,12 @@ export const HistoryRequest_Info = ErrorPicker(() => {
   const render = (
     <RequestBase>
       <Container>
-        <Request_Navigation />
-        <Title>내 의뢰내역서</Title>
+        <Request_Navigation showBack={true} />
+        <Title>
+          <TitleEmail>{email}</TitleEmail>&nbsp;님의
+          <br />
+          의뢰내역서 입니다.
+        </Title>
         {requestSize !== undefined && (
           <>
             {requestSize &&
@@ -72,10 +77,12 @@ export const HistoryRequest_Info = ErrorPicker(() => {
                 등록된 의뢰가 없습니다.
               </GuideText>
             )}
-            <HistoryRequestInfo_ButtonHome />
           </>
         )}
       </Container>
+      <RequestBottomContainer>
+        <HistoryRequestInfo_ButtonHome />
+      </RequestBottomContainer>
       <Request_Background />
     </RequestBase>
   );
@@ -83,9 +90,13 @@ export const HistoryRequest_Info = ErrorPicker(() => {
 }, ["HistoryRequest_Info"]);
 
 const Title = styled.h4`
-  margin-top: 57px;
+  margin-top: 40px;
   font-weight: 900;
   text-align: center;
+  line-height: 23px;
+`;
+const TitleEmail = styled.span`
+  text-decoration: underline;
 `;
 const Container = styled(RequestContainer)`
   padding: 0 24px 50px;

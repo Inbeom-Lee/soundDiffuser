@@ -18,7 +18,7 @@ module.exports = {
       Constants: path.resolve(__dirname, "src/constants"),
       Helpers: path.resolve(__dirname, "src/helpers"),
       Hooks: path.resolve(__dirname, "src/hooks"),
-      Asset: path.resolve(__dirname, "src/assets"),
+      Assets: path.resolve(__dirname, "src/assets"),
       Theme: path.resolve(__dirname, "src/theme"),
     },
     extensions: [".js", ".jsx", "..."],

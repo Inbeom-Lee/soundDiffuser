@@ -6,6 +6,7 @@ export const GlobalTheme = {
     grey2: "#414141",
     grey3: "#5B5B5B",
     grey4: "#ADADAD",
+    grey5: "#D9D9D9",
     text: { black: "#000", white: "#FFF" },
     border: { black: "#000", white: "#FFF" },
     background: { black: "#000", white: "#FFF" },

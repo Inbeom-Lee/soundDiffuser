@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import styled from "styled-components";
 import ErrorPicker from "ErrorPicker";
+import { readColFS } from "Firebase";
 
 const Test = ErrorPicker(() => {
   const handleTest = async () => {
@@ -15,8 +16,9 @@ const Test = ErrorPicker(() => {
       // );
       // console.log(result);
     } catch (err) {
-      const { status, data } = err?.response;
-      console.log(status, data);
+      const { status, data } = err?.response || {};
+
+      data ? console.log(status, data) : console.log(err);
     }
   };
 

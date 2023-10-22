@@ -2,7 +2,11 @@ import React from "react";
 import styled from "styled-components";
 import ErrorPicker from "ErrorPicker";
 import { useRequest } from "Contexts";
-import { RequestBase, RequestContainer, Request_Navigation } from "../shared/request";
+import {
+  RequestBase,
+  RequestContainer,
+  Request_Navigation,
+} from "../shared/request";
 import {
   RequestPersonalDetails_Email,
   RequestPersonalDetails_Button,
@@ -15,7 +19,7 @@ export const NewRequest_PersonalDetails = ErrorPicker(() => {
   const render = (
     <RequestBase>
       <RequestContainer>
-        <Request_Navigation />
+        <Request_Navigation showBack={true} />
         <Container>
           <Text>마지막 단계가 남았습니다</Text>
           <SubText>의뢰 내역서를 발송할 이메일을 입력해주세요</SubText>

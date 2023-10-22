@@ -15,15 +15,14 @@ import {
 import {
   RequestCompleted_InfoTop,
   RequestCompleted_InfoMain,
-  RequestCompleted_Textarea,
-  RequestCompleted_ButtonAddInstruction,
+  RequestCompleted_Instruction,
 } from "./historyRequest_Completed/index";
 
 export const HistoryRequest_Completed = ErrorPicker(() => {
   const [request, setRequest] = useState();
   const [instruction, setInstruction] = useState("");
   const { uidRequest } = useParams();
-  const { listReference, musicPurpose, musicMood, timeRequested } =
+  const { email, listReference, musicPurpose, musicMood, timeRequested } =
     request || {};
   const arrayReference = listReference && Object.values(listReference);
 
@@ -43,27 +42,35 @@ export const HistoryRequest_Completed = ErrorPicker(() => {
     <RequestBase>
       <RequestContainer style={{ padding: "0 23px 50px" }}>
         <Request_Navigation />
-        <Title>의뢰가 완료되었습니다.</Title>
+        <Title>
+          <TitleEmail>{email}</TitleEmail>&nbsp;님의
+          <br />
+          의뢰가 완료되었습니다.
+        </Title>
         <Text>2~3일 내로 담당 PM이 연락드리겠습니다.</Text>
         <InfoContainer>
-          <RequestCompleted_InfoTop timeRequested={timeRequested} />
+          <RequestCompleted_InfoTop
+            timeRequested={timeRequested}
+            uidRequest={uidRequest}
+          />
           <RequestCompleted_InfoMain
             arrayReference={arrayReference}
             musicPurpose={musicPurpose}
             musicMood={musicMood}
           />
-          <RequestCompleted_Textarea
-            instruction={instruction}
-            setInstruction={setInstruction}
-          />
-          <RequestCompleted_ButtonAddInstruction
+          <RequestCompleted_Instruction
             uidRequest={uidRequest}
             instruction={instruction}
+            setInstruction={setInstruction}
           />
         </InfoContainer>
       </RequestContainer>
       <BottomContainer>
-        <Request_BottomButton isActive={true} routeNext="/" textButton="다음" />
+        <Request_BottomButton
+          isActive={true}
+          routeNext="/"
+          textButton="돌아가기"
+        />
       </BottomContainer>
       <Request_Background />
     </RequestBase>
@@ -75,6 +82,10 @@ const Title = styled.h4`
   margin-top: 64px;
   font-weight: 900;
   text-align: center;
+  line-height: 23px;
+`;
+const TitleEmail = styled.span`
+  text-decoration: underline;
 `;
 const Text = styled.p`
   margin-top: 10px;

@@ -7,22 +7,18 @@ export const RequirementsEditorGroup_Deco = ErrorPicker(() => {
     <>
       <DecoContainer>
         <DecoWrapper>
-          <DecoDotBig />
           <DecoDotSmall />
           <DecoDotBig />
         </DecoWrapper>
         <DecoWrapper>
-          <DecoDotBig />
           <DecoDotSmall />
           <DecoDotBig />
         </DecoWrapper>
         <DecoWrapper>
-          <DecoDotBig />
           <DecoDotSmall />
           <DecoDotBig />
         </DecoWrapper>
         <DecoWrapper>
-          <DecoDotBig />
           <DecoDotSmall />
           <DecoDotBig />
         </DecoWrapper>
@@ -37,14 +33,14 @@ const DecoContainer = styled.div`
   display: flex;
   justify-content: flex-end;
   gap: 20px;
-  margin-top: 9px;
+  margin-top: 12px;
   width: 100%;
 `;
 const DecoWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: 9px;
 `;
 const DecoDotBig = styled.div`
   width: 9px;
@@ -57,7 +53,7 @@ const DecoDotSmall = styled(DecoDotBig)`
   height: 5px;
 `;
 const DecoBorder = styled.div`
-  margin-top: 10px;
+  margin-top: 14px;
   width: 100%;
   height: 3px;
   border-radius: 1.5px;

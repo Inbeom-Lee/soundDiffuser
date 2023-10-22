@@ -1,14 +1,21 @@
-import React, { useMemo } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useMemo } from "react";
 import styled from "styled-components";
-import { v4 } from "uuid";
+
 import ErrorPicker from "ErrorPicker";
-import { writeFS } from "Firebase";
-import { Button_DisableToPrimary } from "Components";
+
+import { Button_DisableToPrimary, Modals_Base } from "Components";
+import {
+  RequestPersonalDetailsButton_Modal,
+  RequestPersonalDetailsButton_Loading,
+} from "./requestPersonalDetails_Button/index";
 
 export const RequestPersonalDetails_Button = ErrorPicker(
   ({ dataRequest }) => {
-    const naviage = useNavigate();
+    const [showModal, setShowModal] = useState({
+      status: false,
+      transition: false,
+    });
+    const [isLoading, setIsLoading] = useState(false);
 
     const { email } = dataRequest || {};
 
@@ -19,29 +26,22 @@ export const RequestPersonalDetails_Button = ErrorPicker(
       return testEmail;
     }, [email]);
 
-    const handleComplete = async () => {
-      if (confirm("문의를 완료하시겠습니까?")) {
-        try {
-          const uidRequest = v4();
-          const newRequest = {
-            ...dataRequest,
-            uid: uidRequest,
-            timeRequested: new Date().getTime(),
-          };
-
-          await writeFS(newRequest, ["requests", uidRequest]);
-
-          naviage(`/historyRequest/completed/${uidRequest}`);
-        } catch (err) {
-          console.log(err);
-        }
-      }
-    };
+    const handleShow = () =>
+      setShowModal((prev) => ({ ...prev, status: true }));
 
     const render = (
-      <Button $active={checkEmail} onClick={handleComplete}>
-        다음
-      </Button>
+      <>
+        <Button $active={checkEmail} onClick={handleShow}>
+          다음
+        </Button>
+        <Modals_Base showModal={showModal} setShowModal={setShowModal}>
+          <RequestPersonalDetailsButton_Modal
+            dataRequest={dataRequest}
+            setIsLoading={setIsLoading}
+          />
+          <RequestPersonalDetailsButton_Loading isLoading={isLoading} />
+        </Modals_Base>
+      </>
     );
     return render;
   },

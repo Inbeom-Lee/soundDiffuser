@@ -17,27 +17,21 @@ export const HistoryRequestInfo_Group = ErrorPicker(
       musicPurpose,
       musicMood,
       timeRequested,
-      instruction: initialInstruction,
+      instruction,
     } = request || {};
-
-    const [instruction, setInstruction] = useState(initialInstruction || "");
 
     const arrayReference = listReference && Object.values(listReference);
 
     const render = (
       <Container>
-        <RequestInfoGroup_InfoTop email={email} timeRequested={timeRequested} />
+        <RequestInfoGroup_InfoTop
+          uidRequest={uidRequest}
+          timeRequested={timeRequested}
+        />
         <RequestInfoGroup_InfoMain
           arrayReference={arrayReference}
           musicPurpose={musicPurpose}
           musicMood={musicMood}
-        />
-        <RequestInfoGroup_Textarea
-          instruction={instruction}
-          setInstruction={setInstruction}
-        />
-        <RequestInfoGroup_ButtonAddInstruction
-          uidRequest={uidRequest}
           instruction={instruction}
         />
       </Container>
