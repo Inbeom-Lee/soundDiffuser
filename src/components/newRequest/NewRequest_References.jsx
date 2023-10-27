@@ -78,14 +78,22 @@ export const NewRequest_References = ErrorPicker(() => {
         if (response.data) {
           const { nextPageToken, items } = response?.data || {};
 
-          if (items.length === 0) throw "잘못된 검색입니다.";
+          if (items.length === 0)
+            throw {
+              type: "noResult",
+              message: "잘못된 검색입니다.",
+            };
 
           setNextPageToken(nextPageToken);
           setListSearch((prev) => [...(prev || []), ...items]);
         }
         //---------- YOUTUBE END ----------
       } catch (err) {
-        setShowPopUp({ status: true, message: err || "" });
+        const { type, message } = err || {};
+
+        const getMessage = message || "오류가 발생했습니다. 다시 시도해주세요";
+
+        setShowPopUp({ status: true, message: getMessage });
       } finally {
         //서칭 완료
         setRunSearching(false);

@@ -13,7 +13,7 @@ export const RequestInfoGroup_InfoMain = ErrorPicker(
         <Text>{getPurpose}</Text>
         {arrayReference?.map((ref, i) => {
           const { id, snippet, dataEdit } = ref;
-          const { channelTitle, title } = snippet;
+          const { title } = snippet;
           const { speed, style, timing, mood, clarity, temperature } =
             dataEdit || {};
           const checkEdit = (data) => {
@@ -25,8 +25,7 @@ export const RequestInfoGroup_InfoMain = ErrorPicker(
             <div key={id.videoId}>
               <Label>참고 레퍼런스 음악{i + 1}</Label>
               <Text>
-                {channelTitle}
-                {title}
+                <span dangerouslySetInnerHTML={{ __html: title }} />
                 <br />
                 속도 {checkEdit(speed)}&nbsp;/&nbsp; 스타일 {checkEdit(style)}
                 &nbsp;/&nbsp; 박자 {checkEdit(timing)}&nbsp;/&nbsp; 무드

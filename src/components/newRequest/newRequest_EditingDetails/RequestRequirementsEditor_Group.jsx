@@ -9,10 +9,11 @@ import {
 } from "./requestRequirementsEditor_Group/index";
 
 export const RequestRequirementsEditor_Group = ErrorPicker(
-  ({ reference, index, setDataRequest, handleIsEdit }) => {
+  ({ reference, index, setDataRequest }) => {
     const [toggle, setToggle] = useState(index === 0 ? true : false);
     const { id, snippet, dataEdit } = reference || {};
     const { thumbnails, title, channelTitle } = snippet || {};
+    const { videoId } = id || {};
     const urlThumbnail = thumbnails?.high?.url;
 
     const render = (
@@ -24,16 +25,16 @@ export const RequestRequirementsEditor_Group = ErrorPicker(
         />
         <ToggleContainer $toggle={toggle}>
           <RequirementsEditorGroup_MusicInfo
+            videoId={videoId}
             title={title}
             channelTitle={channelTitle}
             urlThumbnail={urlThumbnail}
           />
           <RequirementsEditorGroup_Deco />
           <RequirementsEditorGroup_Editor
-            videoId={id?.videoId}
+            videoId={videoId}
             dataEdit={dataEdit}
             setDataRequest={setDataRequest}
-            handleIsEdit={handleIsEdit}
           />
         </ToggleContainer>
       </Container>

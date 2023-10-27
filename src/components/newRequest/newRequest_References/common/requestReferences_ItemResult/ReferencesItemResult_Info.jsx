@@ -7,7 +7,7 @@ export const ReferencesItemResult_Info = ErrorPicker(
   ({ title, channelTitle, description }) => {
     const render = (
       <Div_Opacity>
-        <Title>{title}</Title>
+        <Title dangerouslySetInnerHTML={{ __html: title }} />
         <Wrapper>
           <EmptyThumbnailChannel />
           <TextChannel>{channelTitle}</TextChannel>

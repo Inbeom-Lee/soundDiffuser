@@ -2,19 +2,20 @@ import React from "react";
 import axios from "axios";
 import styled from "styled-components";
 import ErrorPicker from "ErrorPicker";
-import { readColFS } from "Firebase";
+import { readColFS, readDocFS } from "Firebase";
 
 const Test = ErrorPicker(() => {
   const handleTest = async () => {
     try {
-      // const result = await axios.post(
-      //   "http://localhost:5001/sounddiffuser-4e8ae/asia-northeast3/api/mail/send",
-      //   {
-      //     apiKey: process.env.API_KEY,
-      //     email: "developer@riif.co.kr",
-      //   }
-      // );
-      // console.log(result);
+      const getData = await readDocFS(["requests", "SD000022"]);
+      const result = await axios.post(
+        "http://localhost:5001/sounddiffuser-4e8ae/asia-northeast3/api/mail/send",
+        {
+          apiKey: process.env.API_KEY,
+          dataRequest: getData,
+        }
+      );
+      console.log(result);
     } catch (err) {
       const { status, data } = err?.response || {};
 

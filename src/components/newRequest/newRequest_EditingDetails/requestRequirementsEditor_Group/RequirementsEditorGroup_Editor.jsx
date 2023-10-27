@@ -4,7 +4,7 @@ import ErrorPicker from "ErrorPicker";
 import { RequirementsEditorGroupEditor_InputRange } from "./requirementsEditorGroup_Editor/index";
 
 export const RequirementsEditorGroup_Editor = ErrorPicker(
-  ({ videoId, dataEdit, setDataRequest, handleIsEdit }) => {
+  ({ videoId, dataEdit, setDataRequest }) => {
     const { speed, style, timing, mood, clarity, temperature } = dataEdit || {};
 
     const handler = useCallback((e) => {
@@ -19,10 +19,10 @@ export const RequirementsEditorGroup_Editor = ErrorPicker(
               ...(prev.listReference[videoId].dataEdit || {}),
               [name]: value,
             },
+            isEdited: true,
           },
         },
       }));
-      handleIsEdit();
     }, []);
 
     const render = (

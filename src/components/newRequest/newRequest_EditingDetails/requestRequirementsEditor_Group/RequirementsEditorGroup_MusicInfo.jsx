@@ -3,11 +3,19 @@ import styled from "styled-components";
 import ErrorPicker from "ErrorPicker";
 
 export const RequirementsEditorGroup_MusicInfo = ErrorPicker(
-  ({ title, channelTitle, urlThumbnail }) => {
+  ({ videoId, title, channelTitle, urlThumbnail }) => {
     const [loadImage, setLoadImage] = useState(false);
 
+    const handleYoutube = (e) => {
+      if (videoId) {
+        e.stopPropagation();
+        const url = `https://youtube.com/watch?v=${videoId}`;
+        window.open(url, "_blank");
+      }
+    };
+
     const render = (
-      <Container>
+      <Container onClick={handleYoutube}>
         {urlThumbnail && (
           <Image
             src={urlThumbnail}
@@ -34,6 +42,12 @@ const Container = styled.div`
   padding: 12px 16px;
   background: ${(props) => props.theme.color.grey1};
   border-radius: 10px;
+  transition: 0.3s;
+
+  &:hover {
+    cursor: pointer;
+    background: #181818;
+  }
 `;
 const InfoContainer = styled.div`
   flex: 100;
@@ -55,6 +69,10 @@ const Title = styled.label`
   line-height: 15px;
   white-space: pre-line;
   overflow: hidden;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 const Image = styled.img`
   flex-shrink: 0;

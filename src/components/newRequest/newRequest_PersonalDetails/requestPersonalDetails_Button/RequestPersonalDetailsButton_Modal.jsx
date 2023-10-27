@@ -48,6 +48,7 @@ export const RequestPersonalDetailsButton_Modal = ErrorPicker(
       } catch (err) {
         setIsLoading(false);
         console.log(err);
+        alert("오류가 발생했습니다. 다시 시도해주세요")
       }
     };
 

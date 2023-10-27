@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useCallback } from "react";
+import React, { useEffect, useMemo } from "react";
 import styled from "styled-components";
 import ErrorPicker from "ErrorPicker";
 import { useRequest } from "Contexts";
@@ -69,7 +69,11 @@ export const NewRequest_EditingDetails = ErrorPicker(() => {
     return getArray;
   }, [listReference]);
 
-  const handleIsEdit = useCallback(() => !isEdited && setIsEdited(true), []);
+  useEffect(() => {
+    const checkEveryEdited = arrayReference.every((data) => data.isEdited);
+
+    !isEdited && checkEveryEdited && setIsEdited(true);
+  }, [listReference]);
 
   const render = (
     <RequestBase>
@@ -84,7 +88,6 @@ export const NewRequest_EditingDetails = ErrorPicker(() => {
               reference={ref}
               index={i}
               setDataRequest={setDataRequest}
-              handleIsEdit={handleIsEdit}
             />
           ))}
         </Container>

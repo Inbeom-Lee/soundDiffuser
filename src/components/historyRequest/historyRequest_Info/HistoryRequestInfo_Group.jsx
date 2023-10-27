@@ -1,16 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import ErrorPicker from "ErrorPicker";
 import { Div_Opacity } from "Components";
 import {
   RequestInfoGroup_InfoTop,
   RequestInfoGroup_InfoMain,
-  RequestInfoGroup_Textarea,
-  RequestInfoGroup_ButtonAddInstruction,
+  RequestInfoGroup_Instruction,
 } from "./historyRequestInfo_Group/index";
 
 export const HistoryRequestInfo_Group = ErrorPicker(
-  ({ email, request }) => {
+  ({ request }) => {
     const {
       uid: uidRequest,
       listReference,
@@ -32,6 +31,10 @@ export const HistoryRequestInfo_Group = ErrorPicker(
           arrayReference={arrayReference}
           musicPurpose={musicPurpose}
           musicMood={musicMood}
+          instruction={instruction}
+        />
+        <RequestInfoGroup_Instruction
+          uidRequest={uidRequest}
           instruction={instruction}
         />
       </Container>
