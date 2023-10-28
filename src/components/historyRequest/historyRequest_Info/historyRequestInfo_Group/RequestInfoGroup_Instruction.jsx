@@ -14,17 +14,17 @@ export const RequestInfoGroup_Instruction = ErrorPicker(
 
     const handleSave = async () => {
       try {
+        setShowInput(false);
         const newData = { instruction: inputText || "" };
         await updateFS(newData, ["requests", uidRequest]);
-        setShowInput(false);
       } catch (err) {
         console.log(err);
       }
     };
 
-    const [tempData, setTempData] = useHandleInput(instruction, () =>
-      setInputText(tempData)
-    );
+    const handleData = () => setInputText(tempData);
+
+    const [tempData, setTempData] = useHandleInput(instruction, handleData);
 
     const render = (
       <Container>
@@ -124,7 +124,7 @@ const Textarea = styled.textarea`
   border-color: ${(props) => props.theme.color.grey4};
   border-radius: 5px;
   resize: none;
-  transition: 0.5s;
+  transition: 0.2s;
 
   ${(props) => {
     const { $showInput } = props;

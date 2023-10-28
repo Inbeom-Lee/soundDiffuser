@@ -3,20 +3,19 @@ import styled, { css } from "styled-components";
 import ErrorPicker from "ErrorPicker";
 import { updateFS } from "Firebase";
 import { useHandleInput } from "Hooks";
+import { Div_Opacity } from "Components";
 
 export const RequestCompleted_Instruction = ErrorPicker(
   ({ uidRequest, instruction, setInstruction }) => {
     const [showInput, setShowInput] = useState(false);
-    const [isEditing, setIsEditing] = useState(true);
 
     const handleShow = () => setShowInput(true);
-    const handleEdit = () => setIsEditing(true);
 
     const handleSave = async () => {
       try {
+        setShowInput(false);
         const newData = { instruction };
         await updateFS(newData, ["requests", uidRequest]);
-        setIsEditing(false);
       } catch (err) {
         console.log(err);
       }
@@ -31,19 +30,14 @@ export const RequestCompleted_Instruction = ErrorPicker(
         <Wrapper $showInput={showInput}>
           <Label>추가 요구사항</Label>
           {showInput ? (
-            <Button
-              $isEditing={isEditing}
-              onClick={isEditing ? handleSave : handleEdit}
-            >
-              {isEditing ? "저장" : "수정"}
-            </Button>
+            <ButtonSave onClick={handleSave}>저장</ButtonSave>
           ) : (
-            <ButtonShow onClick={handleShow}>작성</ButtonShow>
+            <ButtonEdit onClick={handleShow}>수정</ButtonEdit>
           )}
         </Wrapper>
+        {!showInput && <Text>{instruction}</Text>}
         <Textarea
           $showInput={showInput}
-          $isEditing={isEditing}
           value={tempData}
           onChange={setTempData}
         />
@@ -68,7 +62,7 @@ const Label = styled.label`
   font-size: 12px;
   font-weight: 600;
 `;
-const ButtonShow = styled.button`
+const ButtonEdit = styled.button`
   margin-left: 10px;
   width: fit-content;
   height: fit-content;
@@ -84,52 +78,52 @@ const ButtonShow = styled.button`
     cursor: pointer;
   }
 `;
-const Button = styled.button`
+const ButtonSave = styled.button`
   width: 27px;
   height: 14px;
   font-family: "appleSD";
   font-weight: 600;
   font-size: 8px;
+
   border: 0.5px solid;
   border-radius: 1px;
   transition: 0.5s;
 
   ${(props) => {
-    const { $isEditing, theme } = props;
-    const { primary, text, border, grey4, grey3 } = theme.color;
+    const { primary, text, border } = props.theme.color;
 
-    return $isEditing
-      ? css`
-          color: ${text.white};
-          background: ${primary};
-          border-color: ${border.white};
-        `
-      : css`
-          color: ${text.white};
-          background: ${grey4};
-          border-color: ${border.white};
-
-          &:hover {
-            background: ${grey3};
-          }
-        `;
+    return css`
+      color: ${text.white};
+      background: ${primary};
+      border-color: ${border.white};
+    `;
   }}
 
   &:hover {
     cursor: pointer;
   }
 `;
+const Text = styled(Div_Opacity)`
+  margin-top: 7px;
+  font-family: "appleSD";
+  font-weight: 400;
+  font-size: 12px;
+  color: ${(props) => props.theme.color.grey4};
+  line-height: 13px;
+  white-space: pre-line;
+`;
 const Textarea = styled.textarea`
   display: block;
   margin-top: 14px;
   width: 100%;
   font-size: 12px;
-
+  color: ${(props) => props.theme.color.text.black};
   background: ${(props) => props.theme.color.background.white};
   border-style: solid;
+  border-color: ${(props) => props.theme.color.grey4};
   border-radius: 5px;
   resize: none;
-  transition: 0.5s;
+  transition: 0.2s;
 
   ${(props) => {
     const { $showInput } = props;
@@ -140,25 +134,9 @@ const Textarea = styled.textarea`
           border-width: 1px;
         `
       : css`
-          padding: 0;
+          padding: 0 10px;
           height: 0;
           border-width: 0;
-        `;
-  }}
-  ${(props) => {
-    const { $isEditing, theme } = props;
-    const { text, grey4 } = theme.color;
-
-    return $isEditing
-      ? css`
-          color: ${text.black};
-          border-color: ${grey4};
-          pointer-events: auto;
-        `
-      : css`
-          color: ${grey4};
-          border-color: ${grey4};
-          pointer-events: none;
         `;
   }}
 

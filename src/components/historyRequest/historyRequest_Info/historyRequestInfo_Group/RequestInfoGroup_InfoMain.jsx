@@ -37,8 +37,6 @@ export const RequestInfoGroup_InfoMain = ErrorPicker(
         })}
         <Label>제작 컨셉</Label>
         <Text>{getMood}</Text>
-        <Label>추가 요구사항</Label>
-        <Text>{instruction}</Text>
       </Container>
     );
     return render || null;
